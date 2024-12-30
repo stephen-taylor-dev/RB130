@@ -32,34 +32,52 @@
 # # welcome('Hey') { 'Joe' }   # => Hey Joe
 # welcome('Hi!')                # => Hi! (there's a space after the !)
 
-require 'minitest/autorun'
+# require 'minitest/autorun'
 
-class Cat
-  attr_accessor :name
+# class Cat
+#   attr_accessor :name
 
-  def initialize(name)
-    @name = name
+#   def initialize(name)
+#     @name = name
+#   end
+
+#   def miaow
+#     "#{name} is miaowing."
+#   end
+# end
+
+
+# class CatTest < Minitest::Test
+#   def setup
+#     @kitty = Cat.new('Kitty')
+#   end
+
+#   def test_is_cat; end
+
+#   def test_name
+#     assert_equal(@kitty.name, 'Milo')
+#   end
+
+#   def test_miaow; end
+
+#   def test_raises_error; end
+# end
+
+class Example
+  attr_writer :value
+  def initialize(value)
+    @value = value
   end
 
-  def miaow
-    "#{name} is miaowing."
+  def update_value
+    p value  # `self` is required to call the setter
   end
+
+  private
+
+  attr_accessor :value
 end
 
-
-class CatTest < Minitest::Test
-  def setup
-    @kitty = Cat.new('Kitty')
-  end
-
-  def test_is_cat; end
-
-  def test_name
-    assert_equal(@kitty.name, 'Milo')
-  end
-
-  def test_miaow; end
-
-  def test_raises_error; end
-end
-
+example = Example.new(50)
+example.update_value
+# example.value = 42  # Error: private method `value=` called
