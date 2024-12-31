@@ -126,57 +126,67 @@ end
 
 
 class SimpleLinkedList
+  attr_accessor :head
+
   def initialize
-    @head 
+    @head = nil
   end
 
   def size
-    list.size
+    size = 0
+    curr_element = head
+    while curr_element
+      size += 1
+      curr_element = curr_element.next
+    end
+    size
   end
 
   def empty?
-    list.empty?
-  end
-
-  # returns last element or nil
-  def head
-    list.first
+    !head
   end
 
   def peek
-    list.last
+    head ? head.datum : nil # return head value, if empty return nil
   end
 
-  def push(element, next_el)
-    list << Element.new(element, next_el)
+  def push(element)
+    self.head = Element.new(element, head)
   end
 
   def pop 
-    last_element = list.peak
+    curr_head = head
+    self.head = head.next
+    curr_head.datum
   end
 
   def to_a
-    
+    arr_list = []
+    curr_element = head
+    while curr_element
+      arr_list << curr_element.datum
+      curr_element = curr_element.next
+    end
+    arr_list
   end
 
   def reverse
-    
+    list = SimpleLinkedList.new
+    curr_element = head
+    while curr_element
+      list.push(curr_element.datum)
+      curr_element = curr_element.next
+    end
+    list
   end
 
   def self.from_a(arr=[])
     list = SimpleLinkedList.new()
-    arr.each do |i|
-      list.push(Element.new(i)
+    return list unless arr
+    arr.reverse.each do |i|
+      list.push(Element.new(i).datum)
     end
-    
+    list
   end
-
-  private
-  attr_reader :list
 end
 
-element1 = Element.new(1) 
-p element2 = Element.new(1, element1)
-
-p element1.tail?
-p element2.tail?
