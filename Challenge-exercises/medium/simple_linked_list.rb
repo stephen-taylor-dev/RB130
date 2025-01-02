@@ -2,7 +2,7 @@
 Problem:
 
   Input:
-  Output:
+  Output:5
 
 Requirments:
 

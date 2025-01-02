@@ -219,10 +219,31 @@
 # list(a_variable)
 # 
 
-def greeting(name)
-  yield(name) if block_given?
+# def concatenate_string
+#   word = ''
+#   Proc.new { |x| word += x }
+# end
+  
+# proc1 = concatenate_string 
+# proc2 = concatenate_string 
+
+# # Both proc objects maintain different `word` local variables objects from the `concatenate_string` method
+# puts proc1.call("hello") # Outputs: "hello"
+# puts proc2.call("What's") # Outputs: "What's"
+
+# puts proc1.call(" there") # Outputs: "hello there"
+# puts proc2.call(" up") # Outputs: "What's up"
+
+# puts proc1.call(" Stephen!") # Outputs: "hello there Stephen!"
+# puts proc2.call(" Bob!") # Outputs: "What's up Bob!"
+# 
+items = ['apples', 'corn', 'cabbage', 'wheat']
+
+def gather(items)
+  puts "Let's start gathering food."
+  yield(items)
+  puts "Nice selection of food we have gathered!"
+
 end
 
-greeting("Stephen") do |name, location| 
-  puts "Hello #{name} from #{location}"
-end
+gather(items) { puts "#{items.join(', ')}"}
